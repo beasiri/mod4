@@ -1,0 +1,68 @@
+body{
+    
+
+}
+
+form{
+    width: 400px;
+    max-width: 400px;
+}
+.alert{
+    width: 400px;
+    max-width: 400px;
+}
+
+
+
+
+.navbar {
+    margin-bottom: 0;
+    background-color: black !important;
+    z-index: 9999;
+    border: 0;
+    font-size: 14px !important;
+    line-height: 1.42857143 !important;
+    letter-spacing: 1px;
+    border-radius: 0;
+}
+.navbar li a, .navbar .navbar-brand {
+    color: #FFA500 !important;
+}
+.navbar-nav li a:hover, .navbar-nav li.active a {
+    color: black !important;
+    background-color: #FFA500 !important;
+}
+.navbar-default .navbar-toggle {
+    border-color: transparent;
+    color: #fff !important;
+}
+
+
+
+.open .dropdown-toggle {
+    color: #fff ;
+    background-color: #555 !important;
+}
+.dropdown-menu li a {
+    color: #FFA500 !important;
+}
+.dropdown-menu li a:hover {
+    background-color: #FFA500 !important;
+}
+
+
+.row.content {height: 1500px}
+/* Set gray background color and 100% height */
+.sidenav {
+    background-color: #f1f1f1;
+    height: 100%;
+}
+
+/* On small screens, set height to 'auto' for sidenav and grid */
+@media screen and (max-width: 767px) {
+    .sidenav {
+        height: auto;
+        padding: 15px;
+    }
+    .row.content {height: auto;}
+}
