@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <title><?=Config::get('site_name')?></title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/webroot/css/default.css">
+    <link rel="stylesheet" href="/webroot/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/webroot/bootstrap/css/bootstrap-theme.min.css">
+    <script src="/webroot/bootstrap/js/jquery.min.js"></script>
+    <script src="/webroot/bootstrap/js/bootstrap.min.js"></script>
+
+
+    <!--Сообщение при закрытии сайта! Выскакивает постоянно!-->
+
+    <!--<script>
+        window.onbeforeunload = function() {return confirm('Заходите ещё') || "Заходите ещё";};
+    </script>-->
+
+
+</head>
+
+<body>
+
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/"><?=Config::get('site_name')?></a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a  <?php if (App::getRouter()->getController() == "blogs") {?>class="active" <?php } ?>  href="/blogs">
+                    <span class="glyphicon glyphicon-comment"></span> Blog</a></li>
+                <!--<li><a  <?php if (App::getRouter()->getController() == "forums") {?>class="active" <?php } ?>  href="/forums/">
+                    <span class="glyphicon glyphicon-th-list"></span> Forum</a></li>-->
+                <li><a  <?php if (App::getRouter()->getController() == "contacts") {?>class="active" <?php } ?>href="/contacts/">
+                    <span class="glyphicon glyphicon-phone-alt"></span> Contact Us</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a class="a_admin" href="/admin/"><span class=""></span></a></li>
+                <li><a href="/users/registration"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                <li><a href="/users/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+<?php if ( App::getRouter()->getController() == 'defaults' ) { ?>
+
+<!--<div class="starter-template">
+    <?php if( Session::hasFlash() ){ ?>
+    <div class="alert alert-info" role="alert">
+        <?php Session::flash(); ?>
+    </div>
+    <?php } ?>
+    <?=$data['content']?>
+</div>
+
+<?php } else { ?>
+
+<div class="starter-template">
+    <?php if( Session::hasFlash() ){ ?>
+    <div class="alert alert-info" role="alert">
+        <?php Session::flash(); ?>
+    </div>
+    <?php } ?>
+    <?=$data['content']?>
+</div>
+
+<?php } ?>-->
+
+
+<div id="footer" class="footer">
+    <div class="container text-center">
+        <ul class="list-inline center-block">
+            <li><a href="https://github.com/beasiri" class=""><img src="/webroot/img/social/g.jpg" class=""></a></li>
+            <li><a href="https://www.facebook.com/pasha.shity" class=""><img src="/webroot/img/social/f.jpg" class=""></a></li>
+            <li><a href="https://vk.com/pashashyty" class=""><img src="/webroot/img/social/b.jpg" class=""></a></li>
+        </ul>
+    </div>
+</div>
+
+
+</body>
+
+</html>

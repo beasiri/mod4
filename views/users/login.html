@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/webroot/canvas/normalize.css">
+    <style>
+        body {
+            overflow: hidden;
+            background: black;
+        }
+    </style>
+    <script src="/webroot/canvas/prefixfree.min.js"></script>
+</head>
+
+<body>
+
+<div class="container">
+
+    <br>
+    <br>
+
+<form class="form-horizontal" role="form" action="" method="post">
+    <div class="container" style="">
+        <h1 style="color: white"><b>Please login</b></h1>
+        <hr>
+        <?php if( Session::hasFlash() ){ ?>
+        <div class="alert alert-danger text-center" role="alert">
+            <strong><?php Session::flash(); ?>!</strong>
+        </div>
+        <?php } ?>
+        <div class="row">
+            <div class="col-md-9 personal-info">
+                <br/>
+                <div class="form-group">
+                    <label class="col-lg-3 control-label" style="color: white">Your Login:</label>
+                    <div class="col-lg-6">
+                        <input type="text" id="login" name="login" class="form-control" placeholder="Login" required autofocus/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-3 control-label" style="color: white">Your Password:</label>
+                    <div class="col-lg-6">
+                        <input type="password" id="password" name="password" class="form-control" placeholder="Password" required />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label"></label>
+                    <div class="col-md-6">
+                        <div class="checkbox" style="color: white">
+                            <label><input type="checkbox" value="remember-me" > Remember me</label>
+                        </div>
+                        <br/>
+                        <input class="btn btn-primary" type="submit" value="Sign in">
+                        <input class="btn btn-default" type="reset" onclick="history.back()" value="Back">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+
+
+</div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+</body>
+
+</html>

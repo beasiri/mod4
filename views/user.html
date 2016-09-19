@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <title><?=Config::get('site_name')?></title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/webroot/css/user.css">
+    <link rel="stylesheet" href="/webroot/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/webroot/bootstrap/css/bootstrap-theme.min.css">
+    <script src="/webroot/bootstrap/js/jquery.min.js"></script>
+    <script src="/webroot/bootstrap/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/user/"><?=Config::get('site_name')?> - <?=__('lng.user', 'User')?></a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <?php if (Session::get('login')) { ?>
+            <ul class="nav navbar-nav">
+                <li><a <?php if ( App::getRouter()->getController() == 'blogs' ) {?>class="active"<?php } ?> href="/user/blogs">
+                    <span class="glyphicon glyphicon-comment"></span> Blog</a></li>
+              <!--  <li><a <?php if ( App::getRouter()->getController() == 'forums' ) {?>class="active"<?php } ?> href="/user/forums">
+                    <span class="glyphicon glyphicon-th-list"></span> Forum</a></li>-->
+                <li><a <?php if ( App::getRouter()->getController() == 'contacts' ) {?>class="active"<?php } ?> href="/user/contacts">
+                    <span class="glyphicon glyphicon-phone-alt"></span> Contact Us</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a <?php if ( App::getRouter()->getController() == 'profiles' ) {?>class="active"<?php } ?>href="/user/profiles">
+                    <?php if(Session::get('avatar') != null) { ?>
+                    <img class="avatar img-circle" alt="avatar" src="<?=Session::get('avatar')?>" width="20" height="20">
+                    <?php } else { ?>
+                    <img class="avatar img-circle" alt="avatar" src="/webroot/img/200x200.png" width="20" height="20">
+                    <?php } ?>
+                    <?php if(Session::get('nickname')) { ?>
+                    <?=Session::get('nickname')?>
+                    <?php } else { ?>
+                    <?=Session::get('login')?>
+                    <?php } ?>
+                    </a>
+                </li>
+                <li><a href="/user/users/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+            </ul>
+            <?php } ?>
+        </div>
+    </div>
+</nav>
+
+
+<div class="starter-template">
+    <?php if( Session::hasFlash() ){ ?>
+    <div class="alert alert-info" role="alert">
+        <?php Session::flash(); ?>
+    </div>
+    <?php } ?>
+    <?=$data['content']?>
+</div>
+
+
+</body>
+
+</html>

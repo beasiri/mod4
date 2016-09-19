@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+</head>
+
+<link rel="stylesheet" href="/webroot/css/forums/forum.css">
+
+<body>
+
+<div class="container">
+
+    <br>
+    <br>
+
+<div class="panel panel-forum">
+    <div class="panel-heading">
+    </div>
+    <div class="panel-inner">
+        <table class="table table-primary table-hover tablet">
+
+            <thead>
+            <tr>
+                <th data-class="expand" class="footable-visible footable-first-column">Title</th>
+                <th class="large110 footable-visible" data-hide="phone">Statistics</th>
+                <th class="large21 footable-visible footable-last-column" data-hide="phone">Last post</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <?php foreach($data['discussions'] as $page_data) { ?>
+            <tr>
+                <td class="expand footable-visible footable-first-column" style="width: 65%;"><span class="footable-toggle"></span>
+                    <span class="icon-wrapper">
+			    <i class="row-icon-font icon-moon-default2 icon-moon-voice2 forum-read" title="No unread posts"></i>
+				</span>
+                    <i class="row-icon-font-mini" title="No unread posts"></i>
+                    <div class="desc-wrapper">
+                        <a href="/forums/comments/<?=$page_data['id']?>" style="color: black;" class="topictitle" data-original-title="" title="<?=$page_data['alias']?>">&nbsp;<?=$page_data['title']?></a>
+                        <br>
+                        <?php foreach(Forum::getUser($page_data['user_id']) as $user_data) {?>
+                        by&nbsp;<a href="/user/profiles/user/<?=$user_data['id']?>" style="color: #AA0000;" class="username-coloured" data-original-title="" title=""><?=$user_data['nickname']?></a>
+                        <?php } ?>
+                        <small>&nbsp;-&nbsp;<?=$page_data['date']?></small>
+                    </div>
+                </td>
+                <td class="stats-col footable-visible active" style="width: 15%;">
+                    <span class="stats-wrapper "><?=count(Forum::getCommentsCount($page_data['id']))?>&nbsp;Comments&nbsp;<br></span>
+                </td>
+                <?php foreach(Forum::getLastComment($page_data['id']) as $comment_data) {?>
+                <td class="footable-visible footable-last-column">
+			<span class="last-wrapper text-overflow">
+                <?php foreach(Forum::getUser($comment_data['user_id']) as $user_data) {?>
+                by&nbsp;<a href="/user/profiles/user/<?=$user_data['id']?>" style="color: #AA0000;" class="username-coloured" data-original-title="" title=""><?=$user_data['nickname']?></a>
+                <?php } ?>
+                <br><small><?=$comment_data['date']?></small>
+			</span>
+                </td>
+                <?php } ?>
+            </tr>
+            <?php } ?>
+            </tbody>
+
+        </table>
+    </div>
+</div>
+
+<div  class="form-group" >
+    <input class="btn btn-default" type="reset" onclick="history.back()" value="Back">
+</div>
+
+</div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+</body>
+
+</html>

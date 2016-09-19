@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="/webroot/css/defaults/user_index.css">
+
+</head>
+
+<body id="main">
+
+<br>
+<br>
+
+<div class="top" id="top" style="padding-top: 50px;">
+<!-- Carousel
+================================================== -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <div id="myCarousel" class="carousel slide">
+                <!-- Indicators -->
+                <div class="carousel-inner">
+                    <div class="item active">
+                        <a href="/user/blogs/blog_view/<?=Blog::getTopCommentedBlogs()[0]['id']?>">
+                            <img src="<?=Blog::getTopCommentedBlogs()[0]['photo']?>" style="width:100%" class="img-responsive">
+                        </a>
+                        <div class="container">
+                            <div class="carousel-caption">
+                                <h1 class="text-center" style="background: black; color: #FFA500"><?=Blog::getTopCommentedBlogs()[0]['title']?></h1>
+                                <p></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <a href="/user/blogs/blog_view/<?=Blog::getTopCommentedBlogs()[1]['id']?>">
+                            <img src="<?=Blog::getTopCommentedBlogs()[1]['photo']?>" style="width:100%" class="img-responsive">
+                        </a>
+                        <div class="container">
+                            <div class="carousel-caption">
+                                <h1 style="background: black; color: #FFA500"><?=Blog::getTopCommentedBlogs()[1]['title']?></h1>
+                                <p></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <a href="/user/blogs/blog_view/<?=Blog::getTopCommentedBlogs()[2]['id']?>">
+                            <img src="<?=Blog::getTopCommentedBlogs()[2]['photo']?>" style="width:100%" class="img-responsive">
+                        </a>
+                        <div class="container">
+                            <div class="carousel-caption">
+                                <h1 style="background: black; color: #FFA500"><?=Blog::getTopCommentedBlogs()[2]['title']?></h1>
+                                <p></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Controls -->
+                <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                    <span class="icon-prev"></span>
+                </a>
+                <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                    <span class="icon-next"></span>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="col-md-12">
+                <a href="/user/blogs/blog_view/<?=Blog::getTopCommentedBlogs()[3]['id']?>">
+                    <img src="<?=Blog::getTopCommentedBlogs()[3]['photo']?>" style="width:100%" class="img-responsive">
+                    <h3 style="background: black; color: #FFA500; position: absolute; top: 50%; left: 5%; width: 90%;"><?=Blog::getTopCommentedBlogs()[3]['title']?></h3>
+                    <p></p>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-4" style="bottom: -13px">
+            <div class="col-md-12">
+                <a href="/user/blogs/blog_view/<?=Blog::getTopCommentedBlogs()[4]['id']?>">
+                    <img src="<?=Blog::getTopCommentedBlogs()[4]['photo']?>" style="width:100%" class="img-responsive">
+                    <h3 style="background: black; color: #FFA500; position: absolute; top: 50%; left: 5%; width: 90%;"><?=Blog::getTopCommentedBlogs()[4]['title']?></h3>
+                    <p></p>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+    <script>
+        $('.carousel').carousel({
+            interval: 2000
+        })
+    </script>
+<!-- /.carousel -->
+</div>
+<!--main-->
+<div id="blogs">
+<div class="container" >
+    <div class="row">
+        <!--right-->
+        <div class="col-md-12">
+            <div class="row" >
+                <h2 class="text-center"><span class="colored-title" style="color: lightsalmon;"><b>Recent</b></span><b> Blogs</b></h2>
+                <br>
+                <div class="col-md-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <img src="<?=Blog::getLastBlog()[0]['photo']?>" style="width:100%" class="img-rounded">
+                        </div>
+                        <div class="panel-body">
+                            <?=htmlspecialchars_decode(Blog::getAliasBlog(Blog::getLastBlog()[0]['id'])[0]["SUBSTR(`content`, 1, 500)"])?>...
+                            <a class="btn btn-xs btn-default" href="/user/blogs/blog_view/<?=Blog::getLastBlog()[0]['id']?>">See More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <img src="<?=Blog::getLastBlog()[1]['photo']?>" style="width:100%" class="img-rounded">
+                        </div>
+                        <div class="panel-body"><?=htmlspecialchars_decode(Blog::getAliasBlog(Blog::getLastBlog()[1]['id'])[0]["SUBSTR(`content`, 1, 500)"])?>...
+                            <a class="btn btn-xs btn-default" href="/user/blogs/blog_view/<?=Blog::getLastBlog()[1]['id']?>">See More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <img src="<?=Blog::getLastBlog()[2]['photo']?>" style="width:100%" class="img-rounded">
+                        </div>
+                        <div class="panel-body"><?=htmlspecialchars_decode(Blog::getAliasBlog(Blog::getLastBlog()[2]['id'])[0]["SUBSTR(`content`, 1, 500)"])?>...
+                            <a class="btn btn-xs btn-default" href="/user/blogs/blog_view/<?=Blog::getLastBlog()[2]['id']?>">See More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+</div>
+</div>
+
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<div id="footer" class="footer">
+    <div class="container text-center">
+        <ul class="list-inline center-block">
+            <li><a href="https://github.com/beasiri" class=""><img src="/webroot/img/social/g.jpg" class=""></a></li>
+            <li><a href="https://www.facebook.com/pasha.shity" class=""><img src="/webroot/img/social/f.jpg" class=""></a></li>
+            <li><a href="https://vk.com/pashashyty" class=""><img src="/webroot/img/social/b.jpg" class=""></a></li>
+        </ul>
+    </div>
+</div>
+
+</body>
+
+<script src="/webroot/js/defaults/user_defaults.js"></script>
+
+</html>

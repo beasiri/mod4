@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<style>
+    body:before{
+        content: '';
+        position: absolute; top: 0; left: 0;
+        width: 100%;
+        height: 100%;
+        background: #ccc url('/webroot/img/03.jpg') no-repeat;
+        background-size: cover;
+        -webkit-filter: blur(10px);
+        filter: blur(10px);
+    }
+    form{
+        -webkit-filter: blur(0px) !important;
+        filter: blur(0px) !important;
+    }
+</style>
+
+<head>
+    <meta charset="utf-8">
+</head>
+
+<body>
+
+<br>
+<br>
+<br>
+<br>
+
+<div class="container">
+
+<form action="" method="post" enctype="multipart/form-data" class="form-horizontal" >
+    <div class="container">
+
+        <?php foreach($data as $item) { ?>
+
+        <h1><b>Profile of <?=$item['nickname']?></b></h1>
+        <hr>
+        <br/>
+        <div class="row">
+            <!-- left column -->
+            <div class="col-md-3">
+                <div class="text-center">
+                    <?php if($item['avatar'] != null) { ?>
+                    <img class="avatar img-circle" alt="avatar" src="<?=$item['avatar']?>" width="200" height="200">
+                    <?php } else { ?>
+                    <img class="avatar img-circle" alt="avatar" src="/webroot/img/200x200.png" width="200" height="200">
+                    <?php } ?>
+                </div>
+            </div>
+            <!-- edit form column -->
+            <div class=" col-md-7 col-lg-7 ">
+                <table class="table table-user-information">
+
+                    <tbody>
+                    <tr>
+                        <td>Nickname:</td>
+                        <td><?=$item['nickname']?></td>
+                    </tr>
+                    <tr>
+                        <td>Name:</td>
+                        <td><?=$item['name']?></td>
+                    </tr>
+                    <tr>
+                        <td>Gender</td>
+                        <td><?=$item['gender']?></td>
+                    </tr>
+                    <tr>
+                        <td>Phone:</td>
+                        <td><?=$item['phone']?></td>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td><a href="<?=$item['email']?>"><?=$item['email']?></a></td>
+                    </tr>
+                    <tr>
+                        <td>Vkontakte:</td>
+                        <td><?=$item['vk']?></td>
+                    </tr>
+                    <tr>
+                        <td>Facebook:</td>
+                        <td><?=$item['facebook']?></td>
+                    </tr>
+                    </tbody>
+
+                </table>
+
+                <?php } ?>
+
+                <div class="form-group">
+                    <label class="col-md-3 control-label"></label>
+                    <div class="col-md-8">
+                        <br/>
+                        <!--<input class="btn btn-primary" type="submit" value="Save Changes">-->
+                        <input class="btn btn-default" type="reset" onclick="history.back()" value="Back">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+    <div class="main">
+        <div class="col-sm-2" >
+            <h3><span class="colored-title" style="color: salmon;"><b>Counter</b></span><b></b></h3>
+            <hr>
+            <h3>Comments: <span class="label label-default"><?=(int)User::CountUserBlogComments($item['id'])[0]["COUNT(id)"]+(int)User::CountUserDiscusComments($item['id'])[0]["COUNT(id)"]?></span></h3>
+            <h3>Blog-Vlogs: <span class="label label-success"> <?=User::CountUserBlogs($item['id'])[0]["COUNT(id)"]?></span></h3>
+
+        </div>
+
+        <div class="col-sm-7 text-center">
+            <h3><span class="colored-title" style="color: salmon;"><b>Blog</b></span><b>-Vlogs</b></h3>
+            <hr>
+            <?php foreach(User::getUserBlogs($item['id']) as $blog_data) { ?>
+            <div class="row featurette">
+                <div class="col-md-6 col-md-push-6">
+                    <h4 class="featurette-heading">
+                        <a href="/user/blogs/blog_view/<?=$blog_data['id']?>"
+                           title="<?=$blog_data['title']?>"><b><?=$blog_data['title']?></b></a>
+                    </h4>
+                <span class="text-muted">
+                    <span class="glyphicon glyphicon-time"></span> <?=$blog_data['date']?>
+                    &nbsp;&nbsp;&nbsp;
+
+                    <span class="glyphicon glyphicon-pencil"></span> <?=count(Blog::getCommentCount($blog_data['id']))?>
+                    Comments
+                </span>
+                    <p class="lead"><?=htmlspecialchars_decode(Blog::getAliasBlog350($blog_data['id'])[0]["SUBSTR(`content`, 1, 350)"])?>...</p>
+                </div>
+                <div class="col-md-6 col-md-pull-6">
+                    <a href="/user/blogs/blog_view/<?=$blog_data['id']?>">
+                        <img class="featurette-image img-responsive center-block img-thumbnail"
+                             href="/admin/blogs/blog_view/<?=$blog_data['id']?>" src="<?=$blog_data['photo']?>"
+                             data-holder-rendered="true">
+                    </a>
+                </div>
+            </div>
+            <hr class="featurette-divider">
+            <?php } ?>
+        </div>
+    </div>
+
+</div>
+
+</body>
+
+</html>

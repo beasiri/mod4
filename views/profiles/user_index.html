@@ -1,0 +1,181 @@
+<style>
+
+    body:before{
+        content: '';
+        position: absolute; top: 0; left: 0;
+        width: 100%;
+        height: 100%;
+
+        -webkit-filter: blur(10px);
+        filter: blur(10px);
+    }
+    form{
+        -webkit-filter: blur(0px) !important;
+        filter: blur(0px) !important;
+    }
+    .alert {
+        position: absolute;
+        left: 35%;
+        top: 10%;
+    }
+    hr{
+        background:linear-gradient(90deg, whitesmoke,  lightgrey, grey, lightgrey, whitesmoke);
+        border:0;
+        height:1px
+    }
+
+</style>
+
+<script src="/webroot/js/profile_delete.js"></script>
+
+<head>
+    <meta charset="utf-8">
+</head>
+
+<body>
+
+<br>
+<br>
+<br>
+<br>
+
+<div class="container">
+
+<form action="" method="post" enctype="multipart/form-data" class="form-horizontal" >
+    <?php if( Session::hasFlash() ){ ?>
+    <div class="alert alert-danger fade in text-center" role="alert">
+        <a class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <?php Session::flash(); ?>
+    </div>
+    <?php } ?>
+    <div class="container">
+        <h1><b>Edit Profile</b></h1>
+        <hr>
+        <br/>
+        <div class="row">
+            <!-- left column -->
+            <div class="col-md-3">
+                <div class="text-center">
+                    <?php foreach($data as $item) { ?>
+                    <?php if($item['avatar'] != null) { ?>
+                    <img class="avatar img-circle" alt="avatar" src="<?=$item['avatar']?>" width="250" height="220">
+                    <?php } else { ?>
+                    <img class="avatar img-circle" alt="avatar" src="/webroot/img/200x200.png" width="200" height="200">
+                    <?php } ?>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <h6>Upload a different photo...</h6>
+                    <input class="form-control" name="avatar" id="avatar" type="file" accept="image/*">
+                </div>
+            </div>
+            <!-- edit form column -->
+            <div class="col-md-9 personal-info">
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Your Nickname:</label>
+                        <div class="col-lg-7">
+                            <input type="text" class="form-control" name="nickname" id="nickname" placeholder="Nickname" value="<?=$item['nickname']?>" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Your Name:</label>
+                        <div class="col-lg-7">
+                            <input class="form-control" name="name" type="text" id="name" placeholder="Name" value="<?=$item['name']?>" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Your Gender:</label>
+                        <div class="col-lg-7">
+                        <select class="form-control" id="gender" name="gender">
+                            <option data-icon="glyphicon-heart"><?=$item['gender']?></option>
+                            <option data-icon="glyphicon-heart">Male</option>
+                            <option data-icon="glyphicon-heart">Female</option>
+                        </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Your Phone:</label>
+                        <div class="col-lg-7">
+                            <input class="form-control" name="phone" type="text" id="phone" placeholder="Phone" value="<?=$item['phone']?>" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Vkontakte:</label>
+                        <div class="col-lg-7">
+                            <input class="form-control" name="vk" type="text" id="vk" placeholder="Vkontakte ID" value="<?=$item['vk']?>" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Facebook:</label>
+                        <div class="col-md-7">
+                            <input class="form-control" name="facebook" type="text" id="facebook" placeholder="Facebook ID" value="<?=$item['facebook']?>" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-3 control-label"></label>
+                        <div class="col-md-8">
+                            <br/>
+                            <input class="btn btn-primary" type="submit" value="Save Changes">
+                            <input class="btn btn-default" type="button" onClick='location.href="/user/profiles/edit"' value="Edit Password">
+                            <input class="btn btn-default" type="reset" onClick='location.href="/user/"' value="Cancel">
+                            <button type="button" class="btn btn-danger btn-xs" onClick='return confirmDelete();' style="margin: -34px 0 10px 450px; display:block;"  >&#10008;</button>
+                        </div>
+                    </div>
+                <?php } ?>
+            </div>
+        </div>
+    </div>
+    <hr>
+</form>
+    <div class="main">
+        <div class="col-sm-2" >
+            <h3><span class="colored-title" style="color: salmon;"><b>Counter</b></span><b></b></h3>
+            <hr>
+            <h3>Comments: <span class="label label-default"><?=(int)User::CountUserBlogComments($item['id'])[0]["COUNT(id)"]+(int)User::CountUserDiscusComments($item['id'])[0]["COUNT(id)"]?></span></h3>
+            <h3>Blog-Vlogs: <span class="label label-success"> <?=User::CountUserBlogs($item['id'])[0]["COUNT(id)"]?></span></h3>
+
+        </div>
+
+        <div class="col-sm-7 text-center">
+            <h3><span class="colored-title" style="color: salmon;"><b>Blog</b></span><b>-Vlogs</b></h3>
+            <hr>
+            <?php foreach(User::getUserBlogs($item['id']) as $blog_data) { ?>
+            <div class="row featurette">
+                <div class="col-md-6 col-md-push-6">
+                    <h4 class="featurette-heading">
+                        <a href="/user/blogs/blog_view/<?=$blog_data['id']?>"
+                           title="<?=$blog_data['title']?>"><b><?=$blog_data['title']?></b></a>
+                    </h4>
+                <span class="text-muted">
+                    <span class="glyphicon glyphicon-time"></span> <?=$blog_data['date']?>
+                    &nbsp;&nbsp;&nbsp;
+
+                    <span class="glyphicon glyphicon-pencil"></span> <?=count(Blog::getCommentCount($blog_data['id']))?>
+                    Comments
+                    <?php if(Session::get('id') == $blog_data['user_id']) { ?>
+                    <a href="/user/blogs/edit/<?=$blog_data['id']?>">
+                        <button class="btn btn-sm btn-default btn-xs">&#9998;</button>
+                    </a>
+                        <a href="/user/blogs/delete/<?=$blog_data['id']?>" onclick="return confirmDelete();">
+                            <button class="btn btn-sm btn-default btn-xs">&#10008;</button>
+                        </a>
+                    <?php } ?>
+                </span>
+                    <p class="lead"><?=htmlspecialchars_decode(Blog::getAliasBlog350($blog_data['id'])[0]["SUBSTR(`content`, 1, 350)"])?>...</p>
+                </div>
+                <div class="col-md-6 col-md-pull-6">
+                    <a href="/user/blogs/blog_view/<?=$blog_data['id']?>">
+                        <img class="featurette-image img-responsive center-block img-thumbnail"
+                             href="/admin/blogs/blog_view/<?=$blog_data['id']?>" src="<?=$blog_data['photo']?>"
+                             data-holder-rendered="true">
+                    </a>
+                </div>
+            </div>
+            <hr class="featurette-divider">
+            <?php } ?>
+        </div>
+    </div>
+</div>
+
+</body>
